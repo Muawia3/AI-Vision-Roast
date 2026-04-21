@@ -4,11 +4,19 @@ from PIL import Image
 import os
 from dotenv import load_dotenv
 
-# Load environment variables securely
+# Load environment variables for local development
 load_dotenv()
 
-# Configure the Gemini API key
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# Get API key from Streamlit Secrets (cloud) or environment variables (local)
+try:
+    api_key = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        st.error("❌ GEMINI_API_KEY not found. Please add it to Streamlit Secrets.")
+        st.stop()
+    genai.configure(api_key=api_key)
+except Exception as e:
+    st.error(f"❌ Configuration error: {e}")
+    st.stop()
 
 # Set up the Streamlit page layout
 st.set_page_config(page_title="AI Vision Roast System", page_icon="🔥", layout="wide")
