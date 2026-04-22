@@ -53,11 +53,12 @@ antigravity_css = """
         backdrop-filter: blur(24px) !important;
         border: 1px solid rgba(123, 47, 255, 0.2) !important;
         border-radius: 20px !important;
-        padding: 2rem !important;
+        padding: 1.5rem !important;
         box-shadow: 0 8px 32px rgba(123, 47, 255, 0.1), 
                     0 0 60px rgba(0, 245, 255, 0.05) !important;
         animation: levitate 3s ease-in-out infinite !important;
         position: relative !important;
+        margin-bottom: 1.5rem !important;
     }
     
     .floating-container:nth-child(even) {
@@ -137,18 +138,20 @@ antigravity_css = """
         border: 2px solid rgba(255, 69, 0, 0.3) !important;
         border-left: 4px solid #FF4500 !important;
         border-radius: 16px !important;
-        padding: 2rem !important;
+        padding: 1.5rem !important;
         box-shadow: 0 8px 32px rgba(255, 69, 0, 0.15),
                     0 0 60px rgba(255, 69, 0, 0.1) !important;
         animation: slideUpSpring 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        margin-top: 1rem !important;
+        margin-bottom: 1rem !important;
     }
     
     /* Score bars */
     .score-bar {
-        margin: 1.5rem 0 !important;
+        margin: 0.8rem 0 1.2rem 0 !important;
         background: rgba(255, 255, 255, 0.05) !important;
         border-radius: 10px !important;
-        height: 8px !important;
+        height: 6px !important;
         overflow: hidden !important;
         border: 1px solid rgba(123, 47, 255, 0.2) !important;
     }
@@ -163,8 +166,8 @@ antigravity_css = """
     .score-label {
         display: flex !important;
         justify-content: space-between !important;
-        font-size: 0.9rem !important;
-        margin-bottom: 0.5rem !important;
+        font-size: 0.85rem !important;
+        margin-bottom: 0.3rem !important;
         color: #00F5FF !important;
         font-family: 'JetBrains Mono', monospace !important;
         font-weight: 600 !important;
@@ -244,10 +247,11 @@ antigravity_css = """
     /* Text effects */
     .roast-text {
         font-family: 'Space Grotesk', sans-serif !important;
-        line-height: 1.8 !important;
+        line-height: 1.6 !important;
         color: #FFD700 !important;
-        font-size: 1.05rem !important;
+        font-size: 0.95rem !important;
         white-space: pre-wrap !important;
+        margin: 1rem 0 !important;
     }
 </style>
 """
@@ -265,7 +269,7 @@ with col_header[1]:
 st.markdown("---")
 
 # Main content
-col1, col2 = st.columns(2, gap="large")
+col1, col2 = st.columns([1.2, 1], gap="large")
 
 with col1:
     st.markdown('<div class="floating-container">', unsafe_allow_html=True)
@@ -279,18 +283,22 @@ with col1:
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
-    st.markdown('<div class="floating-container">', unsafe_allow_html=True)
-    st.markdown('<h2 style="color:#00F5FF; text-align:center;">⚡ RESULT</h2>', unsafe_allow_html=True)
-    
     if uploaded_file is not None:
+        st.markdown('<div class="floating-container">', unsafe_allow_html=True)
+        st.markdown('<h2 style="color:#00F5FF; text-align:center;">⚡ PREVIEW</h2>', unsafe_allow_html=True)
+        
         image = Image.open(uploaded_file)
-        st.image(image, use_container_width=True)
-        st.markdown("</div>", unsafe_allow_html=True)
-    else:
-        st.markdown('<div style="text-align:center; color:#666; padding:2rem;">Upload an image to begin</div>', unsafe_allow_html=True)
+        # Resize image to max width 300px
+        max_width = 300
+        ratio = max_width / image.width
+        new_height = int(image.height * ratio)
+        image_resized = image.resize((max_width, new_height))
+        
+        st.image(image_resized, use_container_width=False)
         st.markdown("</div>", unsafe_allow_html=True)
 
 # Action button
+st.markdown("<br>", unsafe_allow_html=True)
 col_btn = st.columns([1, 2, 1])
 with col_btn[1]:
     roast_button = st.button("🔥 IGNITE THE ROAST", use_container_width=True, key="roast_btn")
@@ -318,33 +326,30 @@ if roast_button:
                 response = model.generate_content([system_prompt, image])
                 roast_text = response.text
                 
-                # Display result
+                # Display result in a nice container
+                st.markdown("<br>", unsafe_allow_html=True)
                 st.markdown('<div class="result-card">', unsafe_allow_html=True)
-                st.markdown('<h3 style="color:#FFD700; text-align:center;">🔥 ROAST DELIVERED</h3>', unsafe_allow_html=True)
+                st.markdown('<h3 style="color:#FFD700; text-align:center; margin-top:0;">🔥 ROAST DELIVERED</h3>', unsafe_allow_html=True)
                 st.markdown(f'<div class="roast-text">{roast_text}</div>', unsafe_allow_html=True)
                 
                 # Score visualization
-                st.markdown('<h3 style="color:#00F5FF; margin-top:2rem;">📊 ROAST METRICS</h3>', unsafe_allow_html=True)
+                st.markdown('<h3 style="color:#00F5FF; margin-top:2rem; margin-bottom:1.5rem;">📊 ROAST METRICS</h3>', unsafe_allow_html=True)
                 
-                col_scores = st.columns([1, 3])
-                with col_scores[0]:
-                    pass
-                with col_scores[1]:
-                    # Dynamic scores based on intensity
-                    scores = {
-                        "SAVAGERY": 75 if intensity == "🌶️ MILD" else 85 if intensity == "🔥 HOT" else 95,
-                        "CREATIVITY": 80,
-                        "ACCURACY": 88,
-                        "DAMAGE": 82 if intensity == "🌶️ MILD" else 88 if intensity == "🔥 HOT" else 94
-                    }
-                    
-                    for label, value in scores.items():
-                        st.markdown(f'''
-                        <div class="score-label">{label}<span>{value}%</span></div>
-                        <div class="score-bar">
-                            <div class="score-fill" style="width:{value}%; --fill-percent:{value}%;"></div>
-                        </div>
-                        ''', unsafe_allow_html=True)
+                # Dynamic scores based on intensity
+                scores = {
+                    "SAVAGERY": 75 if intensity == "🌶️ MILD" else 85 if intensity == "🔥 HOT" else 95,
+                    "CREATIVITY": 80,
+                    "ACCURACY": 88,
+                    "DAMAGE": 82 if intensity == "🌶️ MILD" else 88 if intensity == "🔥 HOT" else 94
+                }
+                
+                for label, value in scores.items():
+                    st.markdown(f'''
+                    <div class="score-label">{label}<span>{value}%</span></div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width:{value}%; --fill-percent:{value}%;"></div>
+                    </div>
+                    ''', unsafe_allow_html=True)
                 
                 st.markdown("</div>", unsafe_allow_html=True)
                 
