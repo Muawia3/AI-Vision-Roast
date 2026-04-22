@@ -218,11 +218,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Header
+# Header with inline styles
 st.markdown("""
-    <div class="main-header">
-        <h1>ðŸ”¥ AI Vision Roast System</h1>
-        <p>Powered by Gemini 2.5 Flash - Upload an image and get roasted!</p>
+    <div style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); padding: 40px 20px; border-radius: 15px; text-align: center; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);">
+        <h1 style="font-size: 3em; font-weight: 800; color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); margin: 0;">🔥 AI Vision Roast System</h1>
+        <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1em; margin-top: 10px;">Powered by Gemini 2.5 Flash - Upload an image and get roasted!</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -231,8 +231,8 @@ col1, col2 = st.columns([1, 1], gap="large")
 
 with col1:
     st.markdown("""
-        <div class="card">
-            <div class="card-title">ðŸ“¸ Step 1: Upload Image</div>
+        <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%); border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+            <div style="font-size: 1.5em; font-weight: 700; color: #ff6b35; margin-bottom: 20px;">📸 Step 1: Upload Image</div>
     """, unsafe_allow_html=True)
     
     uploaded_file = st.file_uploader(
@@ -277,15 +277,15 @@ with col1:
 
 with col2:
     st.markdown("""
-        <div class="card">
-            <div class="card-title">âœ¨ Step 2: View Result</div>
+        <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%); border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+            <div style="font-size: 1.5em; font-weight: 700; color: #ff6b35; margin-bottom: 20px;">✨ Step 2: View Result</div>
     """, unsafe_allow_html=True)
     
     if uploaded_file is not None:
         # Display uploaded image
         image = Image.open(uploaded_file)
         
-        st.markdown('<div class="image-container">', unsafe_allow_html=True)
+        st.markdown('<div style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2); border: 2px solid rgba(255, 107, 53, 0.3);">', unsafe_allow_html=True)
         st.image(image, use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
@@ -322,14 +322,14 @@ with col2:
                 progress_placeholder.empty()
                 
                 st.markdown("""
-                    <div class="result-container">
+                    <div style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.05) 100%); border-left: 4px solid #ff6b35; padding: 20px; border-radius: 10px; margin-top: 20px;">
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                            <span style="font-size: 1.5em;">âš¡</span>
+                            <span style="font-size: 1.5em;">⚡</span>
                             <span style="color: #ff6b35; font-weight: 700; font-size: 1.1em;">
                                 AI Generated Roast
                             </span>
                         </div>
-                        <div class="result-text">
+                        <div style="color: #ffffff; font-size: 1.05em; line-height: 1.8; font-family: 'Georgia', serif;">
                 """, unsafe_allow_html=True)
                 
                 st.markdown(response.text)
@@ -347,7 +347,7 @@ with col2:
             except Exception as e:
                 progress_placeholder.empty()
                 st.markdown(f"""
-                    <div class="result-container status-error">
+                    <div style="background: rgba(244, 67, 54, 0.2); border-left: 4px solid #f44336; color: #EF9A9A; padding: 15px; border-radius: 5px; margin-top: 10px;">
                         <strong>âŒ Error:</strong> {str(e)}
                     </div>
                 """, unsafe_allow_html=True)
