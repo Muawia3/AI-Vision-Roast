@@ -18,7 +18,7 @@ except Exception as e:
     st.error(f"âŒ Configuration error: {e}")
     st.stop()
 
-# Set up the Streamlit page layout
+# Set up the Streamlit page layout with beautiful theme
 st.set_page_config(
     page_title="AI Vision Roast System",
     page_icon="ðŸ”¥",
