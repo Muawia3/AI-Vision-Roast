@@ -30,41 +30,41 @@ st.set_page_config(
 st.markdown("""
     <style>
         * {
-            margin: 0;
-            padding: 0;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        html, body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
         }
         
-        .stApp {
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+        .stApp, [data-testid="stApp"] {
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%) !important;
         }
         
         /* Main header styling */
         .main-header {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            padding: 40px 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%) !important;
+            padding: 40px 20px !important;
+            border-radius: 15px !important;
+            text-align: center !important;
+            margin-bottom: 30px !important;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3) !important;
         }
         
         .main-header h1 {
-            font-size: 3em;
-            font-weight: 800;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin: 0;
+            font-size: 3em !important;
+            font-weight: 800 !important;
+            color: white !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+            margin: 0 !important;
         }
         
         .main-header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1em;
-            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 1.1em !important;
+            margin-top: 10px !important;
         }
         
         /* Card styling */
