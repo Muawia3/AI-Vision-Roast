@@ -1,4 +1,4 @@
-import streamlit as st
+﻿import streamlit as st
 import google.generativeai as genai
 from PIL import Image
 import os
@@ -11,17 +11,17 @@ load_dotenv()
 try:
     api_key = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
     if not api_key:
-        st.error("❌ GEMINI_API_KEY not found. Please add it to Streamlit Secrets.")
+        st.error("âŒ GEMINI_API_KEY not found. Please add it to Streamlit Secrets.")
         st.stop()
     genai.configure(api_key=api_key)
 except Exception as e:
-    st.error(f"❌ Configuration error: {e}")
+    st.error(f"âŒ Configuration error: {e}")
     st.stop()
 
 # Set up the Streamlit page layout
 st.set_page_config(
     page_title="AI Vision Roast System",
-    page_icon="🔥",
+    page_icon="ðŸ”¥",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -214,7 +214,7 @@ st.markdown("""
 # Header
 st.markdown("""
     <div class="main-header">
-        <h1>🔥 AI Vision Roast System</h1>
+        <h1>ðŸ”¥ AI Vision Roast System</h1>
         <p>Powered by Gemini 2.5 Flash - Upload an image and get roasted!</p>
     </div>
 """, unsafe_allow_html=True)
@@ -225,7 +225,7 @@ col1, col2 = st.columns([1, 1], gap="large")
 with col1:
     st.markdown("""
         <div class="card">
-            <div class="card-title">📸 Step 1: Upload Image</div>
+            <div class="card-title">ðŸ“¸ Step 1: Upload Image</div>
     """, unsafe_allow_html=True)
     
     uploaded_file = st.file_uploader(
@@ -237,7 +237,7 @@ with col1:
     st.markdown("""
             <hr style="border: none; border-top: 1px solid rgba(255, 107, 53, 0.2); margin: 20px 0;">
             <div style="font-size: 1em; font-weight: 600; color: #ff6b35; margin-bottom: 15px;">
-                🎯 Choose Roast Intensity
+                ðŸŽ¯ Choose Roast Intensity
             </div>
     """, unsafe_allow_html=True)
     
@@ -249,9 +249,9 @@ with col1:
     )
     
     intensity_descriptions = {
-        "Mild": "👶 Lighthearted and friendly",
-        "Medium": "🎭 Witty and sarcastic",
-        "Savage": "🔥 Mercilessly funny"
+        "Mild": "ðŸ‘¶ Lighthearted and friendly",
+        "Medium": "ðŸŽ­ Witty and sarcastic",
+        "Savage": "ðŸ”¥ Mercilessly funny"
     }
     
     st.markdown(f"""
@@ -261,7 +261,7 @@ with col1:
     """, unsafe_allow_html=True)
     
     roast_button = st.button(
-        "🔥 ROAST ME 🔥",
+        "ðŸ”¥ ROAST ME ðŸ”¥",
         use_container_width=True,
         key="roast_btn"
     )
@@ -271,7 +271,7 @@ with col1:
 with col2:
     st.markdown("""
         <div class="card">
-            <div class="card-title">✨ Step 2: View Result</div>
+            <div class="card-title">âœ¨ Step 2: View Result</div>
     """, unsafe_allow_html=True)
     
     if uploaded_file is not None:
@@ -291,7 +291,7 @@ with col2:
                 st.markdown("""
                     <div style="text-align: center; padding: 20px;">
                         <p style="color: #ff6b35; font-size: 1.1em; font-weight: 600;">
-                            🔥 Analyzing the cringe...
+                            ðŸ”¥ Analyzing the cringe...
                         </p>
                     </div>
                 """, unsafe_allow_html=True)
@@ -317,7 +317,7 @@ with col2:
                 st.markdown("""
                     <div class="result-container">
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                            <span style="font-size: 1.5em;">⚡</span>
+                            <span style="font-size: 1.5em;">âš¡</span>
                             <span style="color: #ff6b35; font-weight: 700; font-size: 1.1em;">
                                 AI Generated Roast
                             </span>
@@ -341,13 +341,13 @@ with col2:
                 progress_placeholder.empty()
                 st.markdown(f"""
                     <div class="result-container status-error">
-                        <strong>❌ Error:</strong> {str(e)}
+                        <strong>âŒ Error:</strong> {str(e)}
                     </div>
                 """, unsafe_allow_html=True)
     else:
         st.markdown("""
             <div style="text-align: center; padding: 60px 20px; color: rgba(255, 255, 255, 0.5);">
-                <p style="font-size: 3em; margin-bottom: 15px;">📸</p>
+                <p style="font-size: 3em; margin-bottom: 15px;">ðŸ“¸</p>
                 <p style="font-size: 1.1em;">Upload an image to get started!</p>
                 <p style="font-size: 0.9em; margin-top: 10px;">
                     JPG, PNG, or WebP formats supported
@@ -367,7 +367,7 @@ st.markdown("""
         color: rgba(255, 255, 255, 0.6);
     ">
         <p style="margin: 0; font-size: 0.9em;">
-            Built with ❤️ using Streamlit & Google Gemini API
+            Built with â¤ï¸ using Streamlit & Google Gemini API
         </p>
     </div>
 """, unsafe_allow_html=True)
