@@ -8,14 +8,21 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Get API key from Streamlit Secrets (cloud) or environment variables (local)
+api_key = None
 try:
-    api_key = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        st.error("âŒ GEMINI_API_KEY not found. Please add it to Streamlit Secrets.")
-        st.stop()
+    api_key = st.secrets.get("GEMINI_API_KEY")
+except Exception:
+    pass
+
+# Fall back to environment variable if secrets not available
+if not api_key:
+    api_key = os.getenv("GEMINI_API_KEY")
+
+# Configure API
+if api_key:
     genai.configure(api_key=api_key)
-except Exception as e:
-    st.error(f"âŒ Configuration error: {e}")
+else:
+    st.error("❌ GEMINI_API_KEY not found. Please set it in .env file or Streamlit Secrets.")
     st.stop()
 
 # Set up the Streamlit page layout with beautiful theme
